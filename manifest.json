@@ -1,0 +1,21 @@
+{
+  "manifest_version": 2,
+
+  "name": "visable",
+  "description": "Resolve location names in the current tab into points on a globe",
+  "version": "1.0",
+
+  "browser_action": {
+    "default_icon": "images/ic_visable.png",
+    "default_popup": "popup.html",
+    "default_title": "Map this!"
+  },
+
+  "permissions": ["geolocation", "activeTab"],
+
+  "web_accessible_resources": [
+    "images/*"
+  ],
+
+  "content_security_policy": "script-src 'self' 'unsafe-eval' https://js.arcgis.com; object-src"
+}

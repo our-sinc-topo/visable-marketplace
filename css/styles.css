@@ -1,0 +1,73 @@
+body {
+	width: 700px;
+	height: 520px;
+}
+
+@media(device-width: 768px) and (device-height: 1024px){
+    ::-webkit-scrollbar {
+        -webkit-appearance: none;
+        width: 7px;
+    }
+    ::-webkit-scrollbar-thumb {
+        border-radius: 4px;
+        background-color: rgba(0,0,0,.5);
+        -webkit-box-shadow: 0 0 1px rgba(255,255,255,.5);
+    }
+}
+
+#places_list {
+    border: 1px solid #000000;
+    background: #ffffff;
+    line-height: 33px;
+    width: 175px;
+    padding-right: 10px;
+    margin: 0px;
+    max-height: 99px;
+    max-width: 200px;
+    overflow:auto;
+    opacity:0.8;
+    -webkit-padding-start: 15px;
+}
+
+#places_list li {
+    list-style-type: none;
+    margin: 0px;
+}
+
+#places_list li:hover {
+    background-color: lightgray;
+}
+
+#mapDiv {
+    height: 100%;
+    width: 100%;
+    -webkit-margin-after: 10px;
+}
+
+#splash {
+    position: fixed;
+    display: block;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: url('chrome-extension://__MSG_@@extension_id__/images/ic_esri_splash.jpg') no-repeat;
+    z-index: 2;
+    cursor: pointer;
+    text-align: center;
+    color:black;
+    padding: 10px;
+    vertical-align: bottom;
+    font: bold small-caps normal 29px Helvetica, sans-serif;
+}
+
+#esriLogo {
+    content: url('chrome-extension://__MSG_@@extension_id__/images/ic_esri.jpg');
+    z-index: 2;
+    float:right;
+    margin: 0;
+    padding: 0;
+
+}
