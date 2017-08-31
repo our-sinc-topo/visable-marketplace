@@ -5,13 +5,13 @@ Visable is a Chrome browser extension that maps the locations on your web page. 
 Download and install Visable it from GitHub.
 
 To install from GitHub:
-1. Download the .zip & extract or clone this repo to your computer using git clone https://github.com/our-sinc-topo/visable.git.
-2. Type chrome://extensions in your Chrome browser's URL bar and hit enter.
+1. Download the .zip & extract or clone this repo to your computer using `git clone https://github.com/our-sinc-topo/visable.git`.
+2. Type `chrome://extensions` in your Chrome browser's URL bar and hit enter.
 3. Check Developer Mode in the upper right hand corner of the extensions page.
 4. Hit Load unpacked extension... on the upper left hand side.
 5. Navigate to the root directory of the extension and select it (the root directly contains manifest.json).
 
-Try it out by going to a page, highlighting some text and = clicking the extension's icon.
+Try it out by going to a page, highlighting some text and clicking the extension's icon.
 
 ## Requirements
 The Chrome browser is required to use this product.
