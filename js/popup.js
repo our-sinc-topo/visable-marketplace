@@ -18,11 +18,11 @@ function onPopupLoad(){
     chrome.runtime.onMessage.addListener(function(request, sender) {
         if (request.action == "getSource") {
 
-            var pageContent = (request.source).toString();
-            var pageContentCleaned = pageContent.replace(/[^a-zA-Z\s]/gi, '').replace(/(\r\n|\n|\r)/gm,'');
-            var places = main(pageContentCleaned);
+            // var pageContent = (request.source).toString();
+            //var pageContentCleaned = pageContent.replace(/[^a-zA-Z\s]/gi, '').replace(/(\r\n|\n|\r)/gm,'');
+            //var places = main(pageContentCleaned);
             console.log(places)
-            // places = ['Seattle', 'Miami', 'Chicago', 'Moscow', 'Tahiti', 'Hawaii', 'Fiji', 'Bulgaria', 'India', 'Belgium', 'France', 'Brussels', 'Madrid']
+            var places = ['Seattle', 'Miami', 'Chicago', 'Moscow', 'Tahiti', 'Hawaii', 'Fiji', 'Bulgaria', 'India', 'Belgium', 'France', 'Brussels', 'Madrid']
 
             renderEsriMap(places);
             $('#splash').hide()

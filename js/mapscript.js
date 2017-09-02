@@ -54,6 +54,8 @@ function renderEsriMap(placesData)
         if(placesData != null)
 		    locatePlacesAndAddToMap(placesData);
 
+
+
 		function addLocationButton()
 		{
 			var locateBtn = new Locate({
@@ -67,8 +69,6 @@ function renderEsriMap(placesData)
 
 		var currBasemapId = 1;
 		var baseMaps = ["streets", "satellite", "hybrid", "topo", "gray", "dark-gray", "oceans", "national-geographic", "terrain", "osm", "dark-gray-vector", "gray-vector",  "streets-vector", "streets-night-vector", "streets-relief-vector", "streets-navigation-vector", "topo-vector"];
-
-
 
         function addEsriLogo()
         {
@@ -92,6 +92,11 @@ function renderEsriMap(placesData)
 				position: "bottom-left"
 			});
 		}
+
+        function openInNewTab(url) {
+
+            chrome.tabs.create({ url: url });
+        }
 
 		function locatePlacesAndAddToMap(placesData)
 		{
@@ -164,6 +169,17 @@ function renderEsriMap(placesData)
 				addPlacesToMap(places, graphicsLayer, sceneView, markerSymbol);
 				addListOfPlaces(places);
 
+                sceneView.popup.on("trigger-action", function(event) {
+
+                    if (event.action.id.includes("explore-place")){
+
+                        var place = places[event.action.id.split('_')[1]];
+                        openInNewTab("http://www.arcgis.com/home/search.html?q=" + place.name + "&t=content&start=1&sortOrder=desc&sortField=relevance", "_blank");
+
+
+                    }
+                });
+
 			}, function(err){
                 console.log(err);
             });
@@ -207,19 +223,6 @@ function renderEsriMap(placesData)
                     actions:[exploreAction]
 				};
 
-                sceneView.popup.on("trigger-action", function(event) {
-
-                    if (event.action.id.includes("explore-place")){
-
-                        var place = places[event.action.id.split('_')[1]];
-
-                        //console.log("http://www.arcgis.com/home/search.html?q=" + place.name + "&t=content&start=1&sortOrder=desc&sortField=relevance");
-
-                        window.open("http://www.arcgis.com/home/search.html?q=" + place.name + "&t=content&start=1&sortOrder=desc&sortField=relevance", "_blank");
-
-
-                    }
-                });
 
 				graphicsLayer.add(pointGraphic)
 			}
