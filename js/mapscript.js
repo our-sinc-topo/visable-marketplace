@@ -180,6 +180,8 @@ function renderEsriMap(placesData)
                     }
                 });
 
+                $('#splash').hide();
+
 			}, function(err){
                 console.log(err);
             });
