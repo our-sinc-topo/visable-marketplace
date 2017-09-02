@@ -18,14 +18,17 @@ function onPopupLoad(){
     chrome.runtime.onMessage.addListener(function(request, sender) {
         if (request.action == "getSource") {
 
-            // var pageContent = (request.source).toString();
-            //var pageContentCleaned = pageContent.replace(/[^a-zA-Z\s]/gi, '').replace(/(\r\n|\n|\r)/gm,'');
+
+            console.log(places);
+
+            //var pageContent = (request.source).toString();
+            //var pageContentCleaned = pageContent.replace(/[^a-zA-Z0-9.,:;'\s]/gi, '').replace(/(\r\n|\n|\r)/gm,' ')//.replace(/(?:[A-Z]+[a-z]{2,}(?:and|of|is|to|the|a|from|in|out)*[ A-za-z\&,-:]*){4,}/, '');
             //var places = main(pageContentCleaned);
-            console.log(places)
-            var places = ['Seattle', 'Miami', 'Chicago', 'Moscow', 'Tahiti', 'Hawaii', 'Fiji', 'Bulgaria', 'India', 'Belgium', 'France', 'Brussels', 'Madrid']
+
+            var places = ['Seattle', 'Miami', 'Chicago', 'Moscow', 'Tahiti', 'Hawaii', 'Fiji', 'Bulgaria', 'India', 'Belgium', 'France', 'Brussels', 'Madrid'];
 
             renderEsriMap(places);
-            $('#splash').hide()
+            $('#splash').hide();
         }
     });
 

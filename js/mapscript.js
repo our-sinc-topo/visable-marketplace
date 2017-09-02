@@ -95,7 +95,7 @@ function renderEsriMap(placesData)
 
         function openInNewTab(url) {
 
-            chrome.tabs.create({ url: url });
+            chrome.tabs.create({ url: url ,active: false});
         }
 
 		function locatePlacesAndAddToMap(placesData)
