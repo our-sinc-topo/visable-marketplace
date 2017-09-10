@@ -215,7 +215,8 @@ function renderEsriMap(placesData)
                 var exploreAction = {
 
                     title: "Explore",
-                    id: "explore-place_" + i
+                    id: "explore-place_" + i,
+                    image: "ic_measure.png"
 
                 };
 
