@@ -63,6 +63,12 @@ body {
     font: bold small-caps normal 29px Helvetica, sans-serif;
 }
 
+#esri_loader{
+    width: 15%;
+    height: 15%;
+    margin-top: 400px;  
+}
+
 #esriLogo {
     content: url('chrome-extension://__MSG_@@extension_id__/images/ic_esri.jpg');
     z-index: 2;
