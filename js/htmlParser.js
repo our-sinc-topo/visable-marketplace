@@ -2,6 +2,8 @@
 function first_word(str) {
   var firstWords = /^[A-Z]+[a-z]+[ \-]?(?:d[a-u].)?(?:[A-Z]+[a-z]+)*|^[A-Za-z\-]*/;
   firstWord = firstWords.exec(str)[0]
+  console.log(str)
+  console.log(firstWord)
   return firstWord
 }
 
@@ -15,13 +17,18 @@ function match_overlap(input, re) {
     );
 	while ((m = re.exec(input)) !== null) {
     	if (m.index === re.lastIndex) {
+    	console.log(m)
+    	console.log(m[1])
         var first_token = first_word(m[1])
+        console.log(first_token)
         var token_length = first_token.length
+        console.log(token_length)
         if (token_length == 0) {
         	token_length = 1
         }
         re.lastIndex = re.lastIndex + token_length;
     	}
+    console.log(m[1])
     r.push(m[1]);
 	}
 	return r
@@ -65,10 +72,21 @@ function get_arr(str) {
 	return arr
 }
 
+function if_one_token(str, find_places) {
+	var spaceCount = (str.split(" ").length - 1);
+	var len_str = str.length;
+	var len_place = find_places.exec(str)[0].length;
+	if (spaceCount <= 1 || len_str == len_place) {
+		return true
+	}
+
+}
+
 // check if identified place token matches all POS criteria
 function is_place(str) {
 	// blacklist of words that will always have the same feature set as a place
 	// but will almost never be a place so they're specifically excluded (unless the place is listed as a city within a state/province/country, e.g. "Monday, Texas")
+	// "there" is considered a noun in the compromise lexicon so is also specifically excluded
 	var blacklist = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday', 'January', 'February', 'March',
 	'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December', 'Jan', 'Feb', 'Mar',
 	'Apr', 'Aug', 'Sept', 'Oct', 'Nov', 'Dec', 'Mercury', 'Venus', 'Earth', 'Mars',
@@ -127,6 +145,14 @@ function main(html) {
 	// used as output of main() --> all places in list are sent to geocoder
 	var places_list = new Array();
 
+	var one_token = if_one_token(html, find_places)
+	if (one_token == true) {
+		places_list.push(find_places.exec(html)[0])
+	}
+	else {
+		console.log(html)
+		console.log(array)
+
 	// iterate iver all 4-token strings in array
 	// array is all 4-token strings on webpage (non-character-consuming)
 	for (i = 0; i < array.length; i++) {
@@ -182,14 +208,15 @@ function main(html) {
 	      	if (is_place(place[0]) == true && (nlp(place, most_common_nouns).nouns().data().length == 0 || nlp(arr).match('* #TitleCase with|on|around|through|at').out('text') == undefined)) {
 	      		places_list.push(place[0])
 	      	}
-	      }
-		  	else {
+	       }
+		  else {
 			  	if (is_place(place[0]) == true) {
 			  		places_list.push(place[0]);
-			  	}
-		  	}  
+			    }
+		   }  
 		}
     }
+}
 	var places_arr = unique(places_list)
 	return places_arr
 }
