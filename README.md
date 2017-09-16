@@ -18,3 +18,10 @@ The Chrome browser is required to use this product.
 
 ## Issues
 Find an issue or want to give us your feedback? Please let us know by submitting an issue. 
+
+## Preprocessing
+1) remove all non-alphanumberic characters/punctuation/spaces
+
+2) replace all hyphens, en dashes, em dashes, and line breaks with spaces
+
+3) replace all backslashes with the word "or" surrounded by a space on each side--" or "
