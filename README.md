@@ -25,3 +25,14 @@ Find an issue or want to give us your feedback? Please let us know by submitting
 2) replace all hyphens, en dashes, em dashes, and line breaks with spaces
 
 3) replace all backslashes with the word "or" surrounded by a space on each side--" or "
+
+## Processing
+1) make sure place is not in comma-seperated string
+	    2) if it is, then add comma-seperated string to list
+      3) if it's in a list of places, get the first place in the list
+      
+4) make sure place is a noun
+      5) if it is, make sure's not a person
+      
+6) make sure place isn't at the start of a sentence
+      7) if it is, take additional steps to make sure it's not a standard, capitalized noun
