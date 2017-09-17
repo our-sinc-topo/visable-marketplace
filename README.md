@@ -27,15 +27,26 @@ Find an issue or want to give us your feedback? Please let us know by submitting
 3) replace all backslashes with the word "or" surrounded by a space on each side--" or "
 
 ## Processing
-1 - make sure place is not in comma-seperated string
-1a - if it is, get the comma-seperated string (e.g. "San Francisco, CA")
-1b - if it's in a list of places, get the first place in the list
-1c - if it's not in a blacklist then consider it a place
-2 - make sure place is a noun
-2a - if it is, check if it's a person
-2b - if it is, check if it's preceded by a preposition, not a contraction, and not in a blacklist
-2c - if it meets these criteria, then consider it to be a place
-3 - make sure place isn't at the start of a sentence
-3a - if it is, take additional steps to make sure it's not a regular, capitalized noun
-3b - check if it's not the name of a common noun or followed by "with", "on", "around", "through", or "at"
-3c - if it is and also isn't in a blacklist then consider it a place
+1) make sure place is not in comma-seperated string
+
+1a) if it is, get the comma-seperated string (e.g. "San Francisco, CA")
+
+1b) if it's in a list of places, get the first place in the list
+
+1c) if it's not in a blacklist then consider it a place
+
+2) make sure place is a noun
+
+2a) if it is, check if it's a person
+
+2b) if it is, check if it's preceded by a preposition, not a contraction, and not in a blacklist
+
+2c) if it meets these criteria, then consider it to be a place
+
+3) make sure place isn't at the start of a sentence
+
+3a) if it is, take additional steps to make sure it's not a regular, capitalized noun
+
+3b) check if it's not the name of a common noun or followed by "with", "on", "around", "through", or "at"
+
+3c) if it is and also isn't in a blacklist then consider it a place
