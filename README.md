@@ -52,7 +52,7 @@ Find an issue or want to give us your feedback? Please let us know by submitting
 3c) if it is and also isn't in a blacklist then consider it a place
 
 ## Rules
-Based on the flowchart above, all places are classified based on the rules the nlp:
+Based on the flowchart above, all places are classified based on the rules of the nlp/html parser:
 
 1. the named-entity (NE) must be a noun
 2. if two NEs are comma-seperated, consider them one place ("San Francisco, CA")
