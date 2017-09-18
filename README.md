@@ -50,3 +50,13 @@ Find an issue or want to give us your feedback? Please let us know by submitting
 3b) check if it's not the name of a common noun or followed by "with", "on", "around", "through", or "at"
 
 3c) if it is and also isn't in a blacklist then consider it a place
+
+## Rules
+Based on the flowchart above, all places are classified based on the rules the nlp:
+
+1. the named-entity (NE) must be a noun
+2. if two NEs are comma-seperated, consider them one place ("San Francisco, CA")
+3. if the NE is in a list, consider each NE in the list independently
+4. the NE must not be the name of a person UNLESS it's preceded by a preposition and not a contratraction
+5. the NE must not be at the start of a sentence UNLESS it's followed by "with", "on", "around", "through", or "at" or isn't in a list of common nouns
+6. the NE must not be a denonym, sports team, currency, company, or brand
