@@ -19,8 +19,8 @@ function onPopupLoad(){
         if (request.action == "getSource") {
 
             var pageContent = (request.source).toString();
-            var pageContentCleaned = pageContent.replace(/[^a-zA-Z0-9.,:;'-\/\s]/gi, '').replace(/(—|--|\r\n|\n|\r)/gm,' ').replace(/(\/)/, ' or ');
-            var places = main(pageContentCleaned);
+            var pageContentCleaned = pageContent.replace(/[^a-zA-Z.,:;'\s]/gi, '').replace(/(—|--|\r\n|\n|\r)/gm,' ').replace(/(\/)/, ' or ');
+            var places = parse(pageContentCleaned);
             // places = ['Seattle', 'Miami', 'Chicago', 'Moscow', 'Tahiti', 'Hawaii', 'Fiji', 'Bulgaria', 'India', 'Belgium', 'France', 'Brussels', 'Madrid']
 
             renderEsriMap(places);

@@ -12,7 +12,7 @@ function first_word(str) {
 // e.g. don't consume characters when matching regex
 function match_overlap(input, re) {
 	var r = new Array();
-  if (!re.global) re = new RegExp(
+    if (!re.global) re = new RegExp(
         re.source, (re+'').split('/').pop() + 'g'
     );
 	while ((m = re.exec(input)) !== null) {
@@ -72,6 +72,11 @@ function get_arr(str) {
 	return arr
 }
 
+
+function check_one_token(str){
+
+}
+
 function if_one_token(str, find_places) {
 	var spaceCount = (str.split(" ").length - 1);
 	var len_str = str.length;
@@ -100,6 +105,7 @@ function is_place(str) {
 	var lexicon_nouns = mostCommonNouns();
 	// identified place must not be a demonym, adjective, adverb, or company
 	// identified place must not be a day of the week or month of the year
+
 	if (nlp(str).terms().data()[0] != undefined) {
 		if (nlp(str).terms().data()[0]["tags"][1] != "Demonym" && nlp(str).terms().data()[0]["tags"][1] != "Adjective" &&
 			nlp(str).terms().data()[0]["tags"][1] != "Adverb" && nlp(str).organizations().data().length == 0 &&
@@ -119,17 +125,15 @@ function is_place(str) {
 // start with four-token string: a possible place, its subsequent word and previous two words
 // places_context regex gets this string
 // different regex is performed depending on POS characteristics of the 4-token string
-function main(html) {
+function parse(html) {
 
 	// get sequence of words that start with a capital letter
 	// e.g. "San Francisco" or "Dallas"
-	var find_places = /(?:[A-Z]+[a-z]+[ \-]?)+/
+	var find_places = /(?:[A-Z][a-z]+[ ]?)+/
 	// get token in the sequence above and its subsequent word and two previous words
 	// e.g. "is near San Francisco coast"
 	var places_context = /(?=(\b(?:(?:\. )*[A-Z]*[a-z]+)\b[ \-,]?\s*(?:([A-Z]+[a-z]+[ \-]?))(?:d[a-u].)?(?:[A-Z]+[a-z]+)*(?:,*)\s*\S*\s*\S*(?:\s*[A-Z]*[a-z]+[ \-,']?){0,2}))/
-	// get all four-token strings without consuming characters returned in places_context
-	// e.g. allows the return of both "is near San Francisco coast" and "coast and Oakland port" from the sentence "The boat is near the San Francisco coast and Oakland port."
-	var array = match_overlap(html, places_context);
+
 	// get all the comma-seperated places not in a list of places
 	// e.g., return "Albany, California" as one place if it's mentioned outside of a list
 	// a list suggests that "Albany" and "California" are two seperate places, but the string "Albany, California" in the middle of a sentence suggests one place in California
@@ -146,77 +150,82 @@ function main(html) {
 	var places_list = new Array();
 
 	var one_token = if_one_token(html, find_places)
-	if (one_token == true) {
+
+    if (one_token == true) {
 		places_list.push(find_places.exec(html)[0])
 	}
 	else {
-		console.log(html)
-		console.log(array)
 
-	// iterate iver all 4-token strings in array
-	// array is all 4-token strings on webpage (non-character-consuming)
-	for (i = 0; i < array.length; i++) {
+        // get all four-token strings without consuming characters returned in places_context
+        // e.g. allows the return of both "is near San Francisco coast" and "coast and Oakland port" from the sentence "The boat is near the San Francisco coast and Oakland port."
+        var array = match_overlap(html, places_context);
 
-	  var arr = get_arr(array[i])
+        // iterate iver all 4-token strings in array
+        // array is all 4-token strings on webpage (non-character-consuming)
+        for (var i = 0; i < array.length; i++) {
 
-	  var inner_place = place_comma_place_comma_place.exec(arr); // list of places
-	  var inner_list = iloc_comma_bloc.exec(arr); // comma-seperated place
-	  var contains_person = nlp(arr).match('* #Person *').out('text');
-	  var selected = nlp(find_places.exec(arr))
-	  var contains_noun = selected.nouns().out('array')
-	  var prep_matches = nlp(arr).match('(at|in|on|through) #Noun *').out('text');
+          var arr = get_arr(array[i])
 
-	  // if the place is in a list of places
-	  if (inner_list != null) {
-	  	// get first place in list of places
-      	var place = get_first_place.exec(inner_place[0])
-	  	if (place != null) {
-	  		places_list.push(place[0]);
-	  	}
-	  	else {
-	    	places_list.push(inner_list[0]);
-	    }
-	  }
+          var inner_place = place_comma_place_comma_place.exec(arr); // list of places
+          var inner_list = iloc_comma_bloc.exec(arr); // comma-seperated place
 
-	  // if place is a noun and not in the blacklist (terms and sale come up on articles as Terms of Sale which has the feature set of a place)
-	  else if (contains_noun.length > 0 && nlp(find_places.exec(arr)).nouns().not(['Terms','Sale','Copyright']).length > 0) {
-	  	var place = find_places.exec(arr)
-	  	// if the noun is the name of a famous person or a common English name 
-	  	if (contains_person.length > 0) {
-	  		// push if the name isn't preceded by a contraction and is preceded by a location-designating preposition
-	  		// otherwise the name is actually a name so don't push name to list of places
-	  		var cont_matches = (nlp(arr).terms(1).data()[0])["tags"][5]
-		  	if ((prep_matches.length > 0) && cont_matches != "Contraction" && is_place(place[0]) == true) {
-		  		places_list.push(place[0]);
-	      	}
-	     }
-	     else {
-	     	if (is_place(place[0]) == true) {
-		       	places_list.push(place[0]);
-	     	}
-	 	 }
-	 }
+          var contains_person = nlp(arr).match('* #Person *').out('text');
+          var selected = nlp(find_places.exec(arr))
+          var contains_noun = selected.nouns().out('array')
+          var prep_matches = nlp(arr).match('(at|in|on|through) #Noun *').out('text');
 
-	     else {
-	      var place = find_places.exec(arr)
-	      var start_of_sentence = /(?:\.\s(?:\s*))+([A-Z]+[a-z]+[\-]?)/
-	      var place_start = start_of_sentence.exec(array[i])
-	      // if the place is at the start of a sentence (words at the start of a sentence often have the same feature set as locations)
-	      if (place_start != null) {
-			// add place to list only if it's (1) not an organization, (2a) not one of the 500 most common nounns unless (2b) that noun is not followed by a location-specific preposition
-			// compromise recognizes words at the start of a sentence as #TitleCase, not #Noun
-	      	if (is_place(place[0]) == true && (nlp(place, most_common_nouns).nouns().data().length == 0 || nlp(arr).match('* #TitleCase with|on|around|through|at').out('text') == undefined)) {
-	      		places_list.push(place[0])
-	      	}
-	       }
-		  else {
-			  	if (is_place(place[0]) == true) {
-			  		places_list.push(place[0]);
-			    }
-		   }  
-		}
+          // if the place is in a list of places
+          if (inner_list != null) {
+            // get first place in list of place
+            var place = get_first_place.exec(inner_place[0])
+            if (place != null) {
+                places_list.push(place[0]);
+            }
+            else {
+                places_list.push(inner_list[0]);
+            }
+          }
+
+          // if place is a noun and not in the blacklist (terms and sale come up on articles as Terms of Sale which has the feature set of a place)
+          else if (contains_noun.length > 0 && nlp(find_places.exec(arr)).nouns().not(['Terms','Sale','Copyright']).length > 0) {
+            var place = find_places.exec(arr)
+            // if the noun is the name of a famous person or a common English name
+            if (contains_person.length > 0) {
+                // push if the name isn't preceded by a contraction and is preceded by a location-designating preposition
+                // otherwise the name is actually a name so don't push name to list of places
+                var cont_matches = (nlp(arr).terms(1).data()[0])["tags"][5]
+                if ((prep_matches.length > 0) && cont_matches != "Contraction" && is_place(place[0]) == true) {
+                    places_list.push(place[0]);
+                }
+             }
+             else {
+                if (is_place(place[0]) == true) {
+                    places_list.push(place[0]);
+                }
+             }
+         }
+
+             else {
+              var place = find_places.exec(arr)
+              var start_of_sentence = /(?:\.\s(?:\s*))+([A-Z]+[a-z]+[\-]?)/
+              var place_start = start_of_sentence.exec(array[i])
+              // if the place is at the start of a sentence (words at the start of a sentence often have the same feature set as locations)
+              if (place_start != null) {
+                // add place to list only if it's (1) not an organization, (2a) not one of the 500 most common nounns unless (2b) that noun is not followed by a location-specific preposition
+                // compromise recognizes words at the start of a sentence as #TitleCase, not #Noun
+                if (is_place(place[0]) == true && (nlp(place, most_common_nouns).nouns().data().length == 0 || nlp(arr).match('* #TitleCase with|on|around|through|at').out('text') == undefined)) {
+                    places_list.push(place[0])
+                }
+               }
+              else {
+                    if (is_place(place[0]) == true) {
+                        places_list.push(place[0]);
+                    }
+               }
+            }
+        }
     }
-}
+
 	var places_arr = unique(places_list)
 	return places_arr
 }
