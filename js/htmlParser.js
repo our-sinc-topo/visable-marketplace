@@ -73,11 +73,11 @@ function if_one_token(str, find_places) {
 // Example input: "American"
 // Example output: false
 function is_place(str) {
-	var lexicon = blacklist()
+	var lexicon = blacklistLexicon()
 	var tag = str.terms().data()[0];
 	var blacklist = str.replace((/( )/, ''), lexicon);
 
-	if (tag != undefined) {
+	if (tag[0] != undefined) {
 		if (tag[0]["tags"][1] != "Demonym" && tag[0]["tags"][1] != "Adjective" &&
 			tag[0]["tags"][1] != "Adverb" && str.organizations().data().length == 0 &&
 			blacklist.match('#Company')["list"].length == 0 && blacklist.match('#Date')["list"].length == 0 &&
