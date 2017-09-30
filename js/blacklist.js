@@ -3,7 +3,7 @@
 // 	but almost never used to identify a location
 // In the parser, these words are often considered to be places
 //	but they shouldn't be mapped
-function blacklist() {
+function blacklistLexicon() {
 	lexicon = {
 		"Mercury":"Planet",
 		"Venus":"Planet",
