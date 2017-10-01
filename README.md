@@ -1,62 +1,44 @@
 ## About
-Visable is a Chrome browser extension that maps the locations on your web page. Visable uses a customized natural language processing toolkit to parse the text in your active tab, pull the relevant geographic data and display these locations. Highlight key words, phrases and paragraphs that contain location information and map those places in the current tab. Find places, create maps and explore ArcGIS Online feature layers to the geographic data all with the push of a button.
+Visable is a Chrome browser extension that maps the locations on your web page. Visable uses a customized natural language processing toolkit to parse the text in your active tab, pull the relevant geographic data and display these locations. 
 
-## Install
+Highlight key words, phrases and paragraphs that contain location information and map those places in the current tab. Find places, create maps and explore ArcGIS Online feature layers to the geographic data all with the push of a button.
+
+## Instructions
+### Install
 Download and install Visable it from GitHub.
 
 To install from GitHub:
 1. Download the .zip & extract or clone this repo to your computer using `git clone https://github.com/our-sinc-topo/visable.git`.
 2. Type `chrome://extensions` in your Chrome browser's URL bar and hit enter.
 3. Check Developer Mode in the upper right hand corner of the extensions page.
-4. Hit Load unpacked extension... on the upper left hand side.
-5. Navigate to the root directory of the extension and select it (the root directly contains manifest.json).
+4. Click `Load unpacked extension...` on the upper left hand side.
+5. Navigate to and select the root directory of the extension (the folder that contains manifest.json).
 
-Try it out by going to a page, highlighting some text and clicking the extension's icon.
+### Try it out
+Go to a page, highlighting some text and clicking the extension's icon.
+
+<img src="https://user-images.githubusercontent.com/22160049/31060362-6f164bfa-a6e0-11e7-8d63-f81a5c0acbef.png">
+
+<img src="https://user-images.githubusercontent.com/22160049/31060371-9eb66cdc-a6e0-11e7-912d-3f6f3eb2b341.png">
 
 ## Requirements
 The Chrome browser is required to use this product.
 
 ## Issues
-Find an issue or want to give us your feedback? Please let us know by submitting an issue. 
+Find an issue or want to give us your feedback? Please let us know by [submitting an issue](https://github.com/our-sinc-topo/visable-marketplace/issues). 
 
-## Preprocessing
-1) remove all non-alphanumberic characters/punctuation/spaces
+## Contributors
+Thomas Binu, Evgeni Dobranov, Gracen Hanley, Cyrus Maden, Ankur Rastogi and [contributors](https://github.com/our-sinc-topo/visable-marketplace/graphs).
 
-2) replace all hyphens, en dashes, em dashes, and line breaks with spaces
+Esri welcomes contributions from anyone and everyone. Please see our guidelines for contributing.
 
-3) replace all backslashes with the word "or" surrounded by a space on each side--" or "
+## Copyright and License
+Copyright 2017 Esri
 
-## Processing
-1) make sure place is not in comma-seperated string
+Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the License. You may obtain a copy of the License at
 
-1a) if it is, get the comma-seperated string (e.g. "San Francisco, CA")
+> http://www.apache.org/licenses/LICENSE-2.0
 
-1b) if it's in a list of places, get the first place in the list
+Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the License for the specific language governing permissions and limitations under the License.
 
-1c) if it's not in a blacklist then consider it a place
-
-2) make sure place is a noun
-
-2a) if it is, check if it's a person
-
-2b) if it is, check if it's preceded by a preposition, not a contraction, and not in a blacklist
-
-2c) if it meets these criteria, then consider it to be a place
-
-3) make sure place isn't at the start of a sentence
-
-3a) if it is, take additional steps to make sure it's not a regular, capitalized noun
-
-3b) check if it's not the name of a common noun or followed by "with", "on", "around", "through", or "at"
-
-3c) if it is and also isn't in a blacklist then consider it a place
-
-## Rules
-Based on the flowchart above, all places are classified based on the rules of the nlp/html parser:
-
-1. the named-entity (NE) must be a noun
-2. if two NEs are comma-seperated, consider them one place ("San Francisco, CA")
-3. if the NE is in a list, consider each NE in the list independently
-4. the NE must not be the name of a person UNLESS it's preceded by a preposition and not a contratraction
-5. the NE must not be at the start of a sentence UNLESS it's followed by "with", "on", "around", "through", or "at" or isn't in a list of common nouns
-6. the NE must not be a denonym, sports team, currency, company, or brand
+A copy of the license is available in the repository's `license.txt` file.
