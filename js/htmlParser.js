@@ -77,12 +77,12 @@ function is_place(str) {
 	var tag = str.terms().data()[0];
 	var blacklist = str.replace((/( )/, ''), lexicon);
 
-	if (tag[0] != undefined) {
-		if (tag[0]["tags"][1] != "Demonym" && tag[0]["tags"][1] != "Adjective" &&
-			tag[0]["tags"][1] != "Adverb" && str.organizations().data().length == 0 &&
+	if (tag != undefined) {
+		if (tag["tags"][1] != "Demonym" && tag["tags"][1] != "Adjective" &&
+			tag["tags"][1] != "Adverb" && str.organizations().data().length == 0 &&
 			blacklist.match('#Company')["list"].length == 0 && blacklist.match('#Date')["list"].length == 0 &&
 			blacklist.match('#Planet')["list"].length == 0 && blacklist.match('#Misc')["list"].length == 0 &&
-			tag[0]["tags"][1] != "Preposition" && tag[0]["tags"][1] != "Currency" && tag[0]["tags"][0] != "SportsTeam") {
+			tag["tags"][1] != "Preposition" && tag["tags"][1] != "Currency" && tag["tags"][0] != "SportsTeam") {
 			return true
 		}
 		else {
@@ -138,17 +138,12 @@ function parse(html) {
 
           	// Persons are named-entities that look like places, so explicitely remove all names
           	//	unless the name is a POS such that it must be a location
-          	else if (contains_noun.length > 0) {
+          	else if (contains_person.length > 0) {
 	            var place = find_places.exec(element)
 
-	            if (contains_person.length > 0) {
+	            if (contains_noun.length > 0) {
 	                var cont_matches = (nlpStr.terms(1).data()[0])["tags"][5]
 	                if ((prep_matches.length > 0) && cont_matches != "Contraction" && is_place(nlp(place[0]) == true)) {
-	                    places_list.push(place[0]);
-	                }
-	            }
-	            else {
-	                if (is_place(nlp(place[0])) == true) {
 	                    places_list.push(place[0]);
 	                }
 	            }
