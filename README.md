@@ -15,7 +15,7 @@ To install from GitHub:
 5. Navigate to and select the root directory of the extension (the folder that contains manifest.json).
 
 ### Try it out
-Go to a page, highlighting some text and clicking the extension's icon.
+Go to a page, highlight some text, and click the extension's icon.
 
 <img src="https://user-images.githubusercontent.com/22160049/31060362-6f164bfa-a6e0-11e7-8d63-f81a5c0acbef.png">
 
