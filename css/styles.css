@@ -53,20 +53,26 @@ body {
     left: 0;
     right: 0;
     bottom: 0;
-    background: url('chrome-extension://__MSG_@@extension_id__/images/ic_esri_splash.jpg') no-repeat;
     z-index: 2;
     cursor: pointer;
     text-align: center;
-    color:black;
+    color: black;
     padding: 10px;
     vertical-align: bottom;
     font: bold small-caps normal 29px Helvetica, sans-serif;
 }
 
+#visable_logo{
+    position: absolute;
+    top: 150px;
+    left: 300px;
+    margin-bottom: 175px;
+}
+
 #esri_loader{
-    width: 15%;
-    height: 15%;
-    margin-top: 400px;  
+    width: 6%;
+    height: 10%;
+    margin-top: 400px;
 }
 
 #esriLogo {
@@ -75,5 +81,4 @@ body {
     float:right;
     margin: 0;
     padding: 0;
-
 }
