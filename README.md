@@ -1,4 +1,7 @@
 ## About
+
+![](https://user-images.githubusercontent.com/22160049/31240560-167dd642-a9cf-11e7-9368-7aa96864669c.png)
+
 Visable is a Chrome browser extension that maps the locations on your web page. Visable uses a customized natural language processing toolkit to parse the text in your active tab, pull the relevant geographic data and display these locations. 
 
 Highlight key words, phrases and paragraphs that contain location information and map those places in the current tab. Find places, create maps and explore ArcGIS Online feature layers to the geographic data all with the push of a button.
@@ -15,9 +18,9 @@ To install from GitHub:
 5. Navigate to and select the root directory of the extension (the folder that contains manifest.json).
 
 ### Try it out
-Go to a page, highlight some text, and click the extension's icon.
+Go to a page, highlight some text, and click the extension's icon:
 
-<img src="https://user-images.githubusercontent.com/22160049/31060362-6f164bfa-a6e0-11e7-8d63-f81a5c0acbef.png">
+<img src="https://user-images.githubusercontent.com/22160049/31240782-d050c4a8-a9cf-11e7-8c8d-30140f76dd6e.png">
 
 <img src="https://user-images.githubusercontent.com/22160049/31060371-9eb66cdc-a6e0-11e7-912d-3f6f3eb2b341.png">
 
