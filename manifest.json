@@ -2,13 +2,13 @@
   "manifest_version": 2,
 
   "name": "visable",
-  "description": "Resolve location names in the current tab into points on a globe",
+  "description": "Highlight and map location names in the current tab",
   "version": "1.0",
 
   "browser_action": {
     "default_icon": "images/ic_visable.png",
     "default_popup": "popup.html",
-    "default_title": "Map this!"
+    "default_title": "Visable - highlight text and map the places"
   },
 
   "permissions": ["geolocation", "activeTab"],
