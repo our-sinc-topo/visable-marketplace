@@ -2,7 +2,7 @@
 
 ![](https://user-images.githubusercontent.com/22160049/31240560-167dd642-a9cf-11e7-9368-7aa96864669c.png)
 
-Visable is a Chrome browser extension that maps the locations on your web page. Visable uses a customized natural language processing toolkit to parse the text in your active tab, pull the relevant geographic data and display these locations. 
+Visable is a Chrome browser extension that maps the locations on your web page. Visable uses a customized natural language processing toolkit to parse the text in your active tab, pull the relevant geographic data and display these locations — all in JavaScript. 
 
 Highlight key words, phrases and paragraphs that contain location information and map those places in the current tab. Find places, create maps and explore ArcGIS Online feature layers to the geographic data all with the push of a button.
 
